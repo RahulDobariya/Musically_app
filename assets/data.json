@@ -1,0 +1,74 @@
+[
+        {
+                "songName": "Barcelone",
+                "authorName": "Ed Sheeran",
+                "songUrl": "Barcelona.mp3",
+                "albumImage": "assets/images/barcelona.jpg"
+        },
+        {
+                "songName": "Copenhagen",
+                "authorName": "Imagine Dragons",
+                "songUrl": "Copenhagen.mp3",
+                "albumImage": "assets/images/copenhagen.jpg"
+        },
+        {
+                "songName": "Damascus",
+                "authorName": "Adele",
+                "songUrl": "Damascus.mp3",
+                "albumImage": "assets/images/damascus.jpg"
+        },
+        {
+                "songName": "Florence",
+                "authorName": "Mark Ronson ft. Bruno Mars",
+                "songUrl": "Florence.mp3",
+                "albumImage": "assets/images/florence.jpg"
+        },
+        {
+                "songName": "Istanbul",
+                "authorName": "Queen",
+                "songUrl": "Istanbul.mp3",
+                "albumImage": "assets/images/istanbul.jpg"
+        },
+        {
+                "songName": "Lisbon",
+                "authorName": "Marshmello ft. Bastille",
+                "songUrl": "Lisbon.mp3",
+                "albumImage": "assets/images/lisbon.jpg"
+        },
+        {
+                "songName": "London",
+                "authorName": "Lil Nas X ft. Billy Ray Cyrus",
+                "songUrl": "London.mp3",
+                "albumImage": "assets/images/london.jpg"
+        },
+        {
+                "songName": "NewYork",
+                "authorName": "Tones and I",
+                "songUrl": "NewYork.mp3",
+                "albumImage": "assets/images/new-york.jpg"
+        },
+        {
+                "songName": "Rome",
+                "authorName": "Imagine Dragons",
+                "songUrl": "Rome.mp3",
+                "albumImage": "assets/images/rome.jpg"
+        },
+        {
+                "songName": "Sevilla",
+                "authorName": "Adele",
+                "songUrl": "Sevilla.mp3",
+                "albumImage": "assets/images/sevilla.jpg"
+        },
+        {
+                "songName": "Tokyo",
+                "authorName": "Rahul",
+                "songUrl": "Tokyo.mp3",
+                "albumImage": "assets/images/tokyo.jpg"
+        },
+        {
+                "songName": "Vienna",
+                "authorName": "Sahil",
+                "songUrl": "Vienna.mp3",
+                "albumImage": "assets/images/vienna.jpg"
+        }
+]
