@@ -20,49 +20,6 @@ class MusicRemoteDataSourceImpl implements MusicRemoteDataSource {
   final http.Client client;
 
   MusicRemoteDataSourceImpl({required this.client});
-  // @override
-  // Future<Either<Failure, Crypto>> getSearchCrypto(String name) async {
-  //   try {
-  //     String url = 'https://www.bitstamp.net/api/v2/ticker/$name';
-  //     final response = await client.get(
-  //       Uri.parse(url),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     );
-  //     print(response.body);
-  //     if (response.statusCode == 200) {
-  //       return Right(Crypto.fromJson(json.decode(response.body)));
-  //     } else {
-  //       return Left(ServerFailure());
-  //     }
-  //   } catch (e) {
-  //     throw ServerFailure();
-  //   }
-  // }
-
-  // @override
-  // Future<Either<Failure, OrderBook>> getSearchCryptoOrderList(
-  //     String name) async {
-  //   try {
-  //     String url = 'https://www.bitstamp.net/api/v2/order_book/$name';
-  //     final response = await client.get(
-  //       Uri.parse(url),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     );
-  //     print(response.body);
-  //     if (response.statusCode == 200) {
-  //       return Right(OrderBook.fromJson(json.decode(response.body)));
-  //     } else {
-  //       return Left(ServerFailure());
-  //     }
-  //   } catch (e) {
-  //     throw ServerFailure();
-  //   }
-  // }
-
   @override
   Future<Either<Failure, User>> firebaseLogin(
       String email, String password) async {

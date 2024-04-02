@@ -9,17 +9,7 @@ class GetMusicRepositoryImpl implements GetMusicRespository {
   final MusicRemoteDataSource musicRemoteDataSource;
 
   GetMusicRepositoryImpl({required this.musicRemoteDataSource});
-  // @override
-  // Future<Either<Failure, Crypto>> getSearchCrypto(String name) async {
-  //   return await cryptoRemoteDataSource.getSearchCrypto(name);
-  // }
-
-  // @override
-  // Future<Either<Failure, OrderBook>> getSearchCryptoOrderList(
-  //     String name) async {
-  //   return await cryptoRemoteDataSource.getSearchCryptoOrderList(name);
-  // }
-
+  
   @override
   Future<Either<Failure, User>> firebaseLogin(
       String email, String password) async {

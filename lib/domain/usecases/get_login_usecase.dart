@@ -17,10 +17,6 @@ class GetLoginUseCase implements UseCase<User, Params> {
         params.email, params.password);
   }
 
-  // @override
-  // Future<Either<Failure, OrderBook>> call(params) async {
-  //   return await getCryptoRespository.getSearchCryptoOrderList(params.name);
-  // }
 }
 
 class Params extends Equatable {

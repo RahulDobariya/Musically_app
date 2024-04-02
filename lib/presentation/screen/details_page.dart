@@ -267,15 +267,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       letterSpacing: 1.0,
                       color: Colors.grey),
                 ),
-                // Slider(
-                //     min: 0,
-                //     max: duration.inSeconds.toDouble(),
-                //     value: position.inSeconds.toDouble(),
-                //     onChanged: (value) async {
-                //       final position = Duration(seconds: value.toInt());
-                //       await audioPlayer.seek(position);
-                //       audioPlayer.resume();
-                //     }),
+            
 
                 FutureBuilder<void>(
                   future: Future.wait([
@@ -318,27 +310,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     }
                   },
                 ),
-                // Slider(
-                //   min: 0,
-                //   max: duration.inSeconds.toDouble(),
-                //   value: position.inSeconds.toDouble(),
-                //   onChanged: (value) async {
-                //     final position = Duration(seconds: value.toInt());
-                //     await audioPlayer.seek(position);
-                //     audioPlayer.resume();
-                //   },
-                // ),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(formateTime(position)),
-                //       Text(formateTime(duration - position)),
-                //     ],
-                //   ),
-                // ),
+              
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -379,13 +351,6 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 }
 
-// String formateTime(Duration position) {
-//   String twoDigits(int n) => n.toString().padLeft(2, '0');
-//   final hours = twoDigits(position.inHours);
-//   final min = twoDigits(position.inMinutes.remainder(60));
-//   final sec = twoDigits(position.inSeconds.remainder(60));
-//   return [if (position.inMilliseconds > 0) hours, min, sec].join(":");
-// }
 
 String formateTime(Duration position) {
   String twoDigits(int n) => n.toString().padLeft(2, '0');
