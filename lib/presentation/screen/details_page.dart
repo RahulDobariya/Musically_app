@@ -179,37 +179,60 @@ class _DetailsPageState extends State<DetailsPage> {
         actions: [
           IconButton(
             onPressed: () => _toggleFavorite(widget.songList[currentIndex]),
-            icon: FutureBuilder<DocumentSnapshot>(
-              future: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(_user.uid)
-                  .collection('favorites')
-                  .doc(widget.songList[currentIndex].songName)
-                  .get(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Icon(
-                    Icons.favorite_border_rounded,
-                    color: Colors.red,
-                    size: 25,
-                  );
-                } else {
-                  if (snapshot.hasData && snapshot.data!.exists) {
-                    return const Icon(
-                      Icons.favorite_rounded,
-                      color: Colors.red,
-                      size: 25,
-                    );
-                  } else {
-                    return const Icon(
-                      Icons.favorite_border_rounded,
-                      color: Colors.red,
-                      size: 25,
-                    );
-                  }
-                }
-              },
-            ),
+            icon: _isOnline
+                ? FutureBuilder<DocumentSnapshot>(
+                    future: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(_user.uid)
+                        .collection('favorites')
+                        .doc(widget.songList[currentIndex].songName)
+                        .get(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Icon(
+                          Icons.favorite_border_rounded,
+                          color: Colors.red,
+                          size: 25,
+                        );
+                      } else {
+                        if (snapshot.hasData && snapshot.data!.exists) {
+                          return const Icon(
+                            Icons.favorite_rounded,
+                            color: Colors.red,
+                            size: 25,
+                          );
+                        } else {
+                          return const Icon(
+                            Icons.favorite_border_rounded,
+                            color: Colors.red,
+                            size: 25,
+                          );
+                        }
+                      }
+                    },
+                  )
+                : FutureBuilder<SharedPreferences>(
+                    future: SharedPreferences.getInstance(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List<String> localFavorites =
+                            snapshot.data!.getStringList('favorites') ?? [];
+                        if (localFavorites
+                            .contains(widget.songList[currentIndex].songName)) {
+                          return const Icon(
+                            Icons.favorite_rounded,
+                            color: Colors.red,
+                            size: 25,
+                          );
+                        }
+                      }
+                      return const Icon(
+                        Icons.favorite_border_rounded,
+                        color: Colors.red,
+                        size: 25,
+                      );
+                    },
+                  ),
           )
         ],
         title: const Text(
@@ -267,8 +290,6 @@ class _DetailsPageState extends State<DetailsPage> {
                       letterSpacing: 1.0,
                       color: Colors.grey),
                 ),
-            
-
                 FutureBuilder<void>(
                   future: Future.wait([
                     audioPlayer.getDuration(),
@@ -310,7 +331,6 @@ class _DetailsPageState extends State<DetailsPage> {
                     }
                   },
                 ),
-              
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -350,7 +370,6 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 }
-
 
 String formateTime(Duration position) {
   String twoDigits(int n) => n.toString().padLeft(2, '0');

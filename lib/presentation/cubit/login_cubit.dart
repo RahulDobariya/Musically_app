@@ -20,6 +20,6 @@ class LoginCubit extends Cubit<LoginState> {
       });
     } catch (e) {
       LoginFailure(e.toString());
-    }
+    } 
   }
 }
