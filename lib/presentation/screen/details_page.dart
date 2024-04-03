@@ -33,6 +33,7 @@ class _DetailsPageState extends State<DetailsPage> {
   late User _user;
   late StreamSubscription _connectionSubscription;
   bool _isOnline = true;
+  List<ConnectivityResult> _connectionStatus = [];
   @override
   void initState() {
     super.initState();
@@ -61,9 +62,7 @@ class _DetailsPageState extends State<DetailsPage> {
       await audioPlayer.setSource(AssetSource(url));
       duration = (await audioPlayer.getDuration())!;
       await audioPlayer.pause();
-    } catch (e) {
-      print('Error setting audio source: $e');
-    }
+    } catch (e) {}
   }
 
   Future<void> playNext() async {
@@ -91,6 +90,7 @@ class _DetailsPageState extends State<DetailsPage> {
         Connectivity().onConnectivityChanged.listen((result) {
       setState(() {
         _isOnline = result != ConnectivityResult.none;
+        _connectionStatus = result;
         if (_isOnline) {
           _syncFavoritesWithFirebase();
         }
@@ -130,16 +130,31 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
   Future<void> _toggleFavorite(Songs song) async {
-    if (_isOnline) {
-      // Sync favorites with Firestore
-      await _firestore
+    if (_connectionStatus.contains(ConnectivityResult.mobile) ||
+        _connectionStatus.contains(ConnectivityResult.wifi)) {
+      DocumentSnapshot snapshot = await _firestore
           .collection('users')
           .doc(_user.uid)
           .collection('favorites')
           .doc(song.songName)
-          .set({
-        'name': song.songName,
-      });
+          .get();
+      if (snapshot.exists) {
+        // Song exists in favorites, remove it
+        await _firestore
+            .collection('users')
+            .doc(_user.uid)
+            .collection('favorites')
+            .doc(song.songName)
+            .delete();
+      } else {
+        // Song does not exist in favorites, add it
+        await _firestore
+            .collection('users')
+            .doc(_user.uid)
+            .collection('favorites')
+            .doc(song.songName)
+            .set({'name': song.songName});
+      }
     } else {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List<String> localFavorites = prefs.getStringList('favorites') ?? [];
@@ -179,7 +194,8 @@ class _DetailsPageState extends State<DetailsPage> {
         actions: [
           IconButton(
             onPressed: () => _toggleFavorite(widget.songList[currentIndex]),
-            icon: _isOnline
+            icon: _connectionStatus.contains(ConnectivityResult.mobile) ||
+                    _connectionStatus.contains(ConnectivityResult.mobile)
                 ? FutureBuilder<DocumentSnapshot>(
                     future: FirebaseFirestore.instance
                         .collection('users')
